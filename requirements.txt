@@ -1,0 +1,5 @@
+sentence-transformers>=3.0
+qdrant-client>=1.12
+python-dotenv>=1.0
+huggingface_hub>=0.25
+tqdm>=4.66
