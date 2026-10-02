@@ -33,7 +33,7 @@ class ProductStore:
         ]
         self.client.upsert(collection_name=self.collection, points=points)
 
-    def search(self, vector, limit=5, max_price=None, min_rating=None):
+    def search(self, vector, limit=5, max_price=None, min_rating=None, score_threshold=None):
         conditions = []
         if max_price is not None:
             conditions.append(models.FieldCondition(key="price", range=models.Range(lte=max_price)))
@@ -45,6 +45,7 @@ class ProductStore:
             query=vector,
             limit=limit,
             query_filter=models.Filter(must=conditions) if conditions else None,
+            score_threshold=score_threshold,  # drop results below this similarity
             with_payload=True,
         )
         return result.points

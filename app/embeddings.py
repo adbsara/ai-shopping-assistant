@@ -5,8 +5,8 @@ from app import config
 
 
 class Embedder:
-    def __init__(self, model_name: str = config.EMBED_MODEL):
-        self.model = SentenceTransformer(model_name, device="cpu")
+    def __init__(self, model_name: str = config.EMBED_MODEL, device: str = "cpu"):
+        self.model = SentenceTransformer(model_name, device=device)
         # Longer texts are cut to 512 tokens: faster, and enough for product info
         self.model.max_seq_length = 512
 
